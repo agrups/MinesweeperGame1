@@ -40,6 +40,10 @@ public class Main {
             String key = consoleInput.readConsoleInput();
 
             gameRules.processUserInput(key);
+
+/*            if(map.getRevealed()[1][5] == true){
+                System.out.println("true");
+            }*/
         }
     }
     public static boolean containsMine(List<Mine> mines, int x, int y){

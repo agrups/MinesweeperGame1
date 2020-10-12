@@ -7,7 +7,7 @@ public class GameRendered {
         for (int x = 0; x < 9 /*gameLevel.getGameField().getFieldWidth()*/; x++) {
             for (int y = 0; y < 9/*gameLevel.getGameField().getFieldHeight()*/; y++) {
 
-                if(gameLevel.getGameField().getRevealed()[x][y] == false){
+                if(gameLevel.getGameField().getRevealed(x, y) == false){
                     System.out.print(".");
                     continue;
                 }

@@ -32,8 +32,8 @@ public class GameRules {
                 }
                 break;
             case 'o':
-                if (!level.getGameField().getRevealed()[x][y]){
-                    level.getGameField().getRevealed()[x][y] = true;
+                if (level.getGameField().getRevealed(x, y) == false){
+                    //level.getGameField().getRevealed()[x][y] = true;
                     if(level.getMines().contains(new Mine(new Position(x,y)))){
                         setGameOver(true);
                     }

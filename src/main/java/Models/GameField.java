@@ -51,13 +51,9 @@ public class GameField {
         this.fieldHeight = fieldHeight;
     }
 
-    public boolean[][] getRevealed() {
-        return this.revealed;
-    }
+    public boolean getRevealed(int x, int y) { return this.revealed[x][y]; }
 
-    public void setRevealed(boolean[][] revealed) {
-        this.revealed = revealed;
-    }
+    public void setRevealed(int x, int y) {this.revealed[x][y] = true;}
 
     public boolean outBounds(int x, int y){
         return x<0 || y<0 || x>=fieldWidth || y>=fieldHeight;
@@ -78,8 +74,10 @@ public class GameField {
 
     public void reveal(int x, int y){
         if(outBounds(x,y))return;
-        if(revealed[x][y])return;
-        revealed[x][y]=true;
+/*        if(revealed[x][y])return;
+        revealed[x][y]=true;*/
+        if(getRevealed(x, y))return;
+        setRevealed(x, y);
         if(calculateMinesNear(x,y)!=0)return;
         reveal(x-1,y-1);
         reveal(x-1,y+1);
