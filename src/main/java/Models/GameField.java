@@ -6,9 +6,9 @@ public class GameField {
 
     private boolean[][] revealed = new boolean[fieldWidth][fieldHeight];
 
-    //private int model[][] = new int[fieldWidth][fieldHeight];
+    private int model[][] = new int[fieldWidth][fieldHeight];
 
-    private int model[][] = new int[][] {
+/*    private int model[][] = new int[][] {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0},
@@ -18,11 +18,11 @@ public class GameField {
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0},
             {0,0,0,0,0,0,0,0,0},
-    };
+    };*/
 
-/*    public GameField() {
+    public GameField() {
         setup();
-    }*/
+    }
 
     public int getValue(int x, int y){
         return model[x][y];
@@ -30,7 +30,7 @@ public class GameField {
     public void setup() {
         for (int x = 0; x < fieldWidth; x++) {
             for (int y = 0; y < fieldHeight; y++) {
-                revealed[x][y] = false;
+                this.revealed[x][y] = false;
                 model[x][y] = 0;
             }
         }
@@ -52,7 +52,7 @@ public class GameField {
     }
 
     public boolean[][] getRevealed() {
-        return revealed;
+        return this.revealed;
     }
 
     public void setRevealed(boolean[][] revealed) {

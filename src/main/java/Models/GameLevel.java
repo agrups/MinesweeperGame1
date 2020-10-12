@@ -21,7 +21,7 @@ public class GameLevel {
         return gameField;
     }
 
-    public void setGameField(GameField gamefield) {
+    public void setGameField(GameField gameField) {
         this.gameField = gameField;
     }
 

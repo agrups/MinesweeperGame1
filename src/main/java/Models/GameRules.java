@@ -37,6 +37,10 @@ public class GameRules {
                     if(level.getMines().contains(new Mine(new Position(x,y)))){
                         setGameOver(true);
                     }
+                    else{
+                        level.getGameField().reveal(x, y);
+                    }
+                    //else parasyti
                 }
                 break;
         }
