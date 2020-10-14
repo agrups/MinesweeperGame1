@@ -4,8 +4,8 @@ package Models;
 public class GameRendered {
 
     public void renderMap(GameLevel gameLevel) {
-        for (int x = 0; x < 9 /*gameLevel.getGameField().getFieldWidth()*/; x++) {
-            for (int y = 0; y < 9/*gameLevel.getGameField().getFieldHeight()*/; y++) {
+        for (int x = 0; x < gameLevel.getGameField().getFieldHeight(); x++) {
+            for (int y = 0; y < gameLevel.getGameField().getFieldWidth(); y++) {
 
                 if(gameLevel.hasFlag(new Position(x, y))){
                     System.out.print("F");

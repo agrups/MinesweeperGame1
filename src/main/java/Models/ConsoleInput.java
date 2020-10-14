@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ConsoleInput {
 
-    public String readConsoleInput() throws IOException {
+    public String readConsoleInput(GameLevel gameLevel) throws IOException {
 
         boolean check = false;
         Scanner scan = new Scanner(System.in);
@@ -15,8 +15,8 @@ public class ConsoleInput {
 
             input = scan.next();
             if((input.charAt(0) == 'f' || input.charAt(0) == 'o')
-                    && Integer.parseInt(input.substring(1, 2)) < 9
-                    && Integer.parseInt(input.substring(2)) < 9
+                    && Integer.parseInt(input.substring(1, 2)) < gameLevel.getGameField().getFieldHeight()
+                    && Integer.parseInt(input.substring(2)) < gameLevel.getGameField().getFieldWidth()
                     && input.length() == 3){
                 check = true;
             }else{

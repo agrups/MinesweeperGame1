@@ -8,18 +8,6 @@ public class GameField {
 
     private int model[][] = new int[fieldWidth][fieldHeight];
 
-/*    private int model[][] = new int[][] {
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-            {0,0,0,0,0,0,0,0,0},
-    };*/
-
     public GameField() {
         setup();
     }
@@ -36,8 +24,8 @@ public class GameField {
         return model[x][y];
     }
     public void setup() {
-        for (int x = 0; x < fieldWidth; x++) {
-            for (int y = 0; y < fieldHeight; y++) {
+        for (int x = 0; x < fieldHeight; x++) {
+            for (int y = 0; y < fieldWidth; y++) {
                 this.revealed[x][y] = false;
                 model[x][y] = 0;
             }
@@ -67,7 +55,6 @@ public class GameField {
         return x<0 || y<0 || x>=fieldWidth || y>=fieldHeight;
     }
 
-    //calculate nearest mines
     public int calculateMinesNear(int x, int y) {
         if(outBounds(x,y))return 0;
         int count=0;
@@ -82,11 +69,9 @@ public class GameField {
 
     public void reveal(int x, int y){
         if(outBounds(x,y))return;
-/*        if(revealed[x][y])return;
-        revealed[x][y]=true;*/
-        if(getRevealed(x, y) == true)return;
+        if(getRevealed(x, y))return;
         setRevealed(x, y, true);
-        if(calculateMinesNear(x,y)!=0)return;    //buvo ir turi buti !=
+        if(calculateMinesNear(x,y)!=0)return;
         reveal(x-1,y-1);
         reveal(x-1,y+1);
         reveal(x+1,y-1);

@@ -52,7 +52,6 @@ public class GameLevel {
     }
 
     public Flag getFlag(Position position){
-/*        return flags.stream().filter(flag -> flag.getPosition() == position).findFirst().orElse(null);*/
         return flags.stream().filter(flag -> flag.getPosition().getX() == position.getX() &&
                 flag.getPosition().getY() == position.getY()).findFirst().orElse(null);
     }

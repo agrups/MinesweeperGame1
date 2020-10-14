@@ -13,7 +13,7 @@ public class Main {
 
         Random rand = new Random();
         int i = 0;
-        while (i < 9) {//We don't want mines to overlap, so while loop
+        while (i < 9) {
             int x = rand.nextInt(9);
             int y = rand.nextInt(9);
             if (containsMine(mines, x, y)) continue;
@@ -29,7 +29,6 @@ public class Main {
 
         GameRendered renderer = new GameRendered();
 
-
         GameRules gameRules = new GameRules(level);
 
         ConsoleInput consoleInput = new ConsoleInput();
@@ -38,7 +37,7 @@ public class Main {
 
             renderer.renderMap(level);
 
-            String key = consoleInput.readConsoleInput();
+            String key = consoleInput.readConsoleInput(level);
 
             gameRules.processUserInput(key);
         }
