@@ -41,20 +41,15 @@ public class Main {
             String key = consoleInput.readConsoleInput();
 
             gameRules.processUserInput(key);
-
-            System.out.println(level.getFlags().size());
         }
 
         renderer.renderMap(level);
 
-        if(gameRules.isGameOver()){
+        if(gameRules.isGameOver() && !gameRules.isWon()){
             System.out.println("There was a mine. You have lost");
-        }else{
-            System.out.println("Congrats, you won!!!");
         }
     }
     public static boolean containsMine(List<Mine> mines, int x, int y){                 //sitas kartojasi klaseje gamelevel
-/*        return mines.stream().anyMatch((mine -> mine.getPosition() == new Position(x, y)));*/
         return mines.stream().anyMatch((mine -> mine.getPosition().getX() == x &&
                 mine.getPosition().getY() == y));
     }

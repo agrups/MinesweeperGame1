@@ -61,7 +61,7 @@ public class GameField {
 
     public boolean getRevealed(int x, int y) { return this.revealed[x][y]; }
 
-    public void setRevealed(int x, int y) {this.revealed[x][y] = true;}
+    public void setRevealed(int x, int y, boolean b) {this.revealed[x][y] = b;}
 
     public boolean outBounds(int x, int y){
         return x<0 || y<0 || x>=fieldWidth || y>=fieldHeight;
@@ -85,7 +85,7 @@ public class GameField {
 /*        if(revealed[x][y])return;
         revealed[x][y]=true;*/
         if(getRevealed(x, y) == true)return;
-        setRevealed(x, y);
+        setRevealed(x, y, true);
         if(calculateMinesNear(x,y)!=0)return;    //buvo ir turi buti !=
         reveal(x-1,y-1);
         reveal(x-1,y+1);
