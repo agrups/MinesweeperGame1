@@ -17,8 +17,9 @@ public class Main {
             int x = rand.nextInt(9);
             int y = rand.nextInt(9);
             if (containsMine(mines, x, y)) continue;
-            mines.add(new Mine(new Position(x, y)));
-            // mines[x][y]=1;
+            Mine mine = new Mine(new Position(x, y));
+            mines.add(mine);
+            map.setModel(x, y);
             i++;
         }
 
@@ -41,12 +42,20 @@ public class Main {
 
             gameRules.processUserInput(key);
 
-/*            if(map.getRevealed()[1][5] == true){
-                System.out.println("true");
-            }*/
+            System.out.println(level.getFlags().size());
+        }
+
+        renderer.renderMap(level);
+
+        if(gameRules.isGameOver()){
+            System.out.println("There was a mine. You have lost");
+        }else{
+            System.out.println("Congrats, you won!!!");
         }
     }
-    public static boolean containsMine(List<Mine> mines, int x, int y){
-        return mines.stream().anyMatch((mine -> mine.getPosition() == new Position(x, y)));
+    public static boolean containsMine(List<Mine> mines, int x, int y){                 //sitas kartojasi klaseje gamelevel
+/*        return mines.stream().anyMatch((mine -> mine.getPosition() == new Position(x, y)));*/
+        return mines.stream().anyMatch((mine -> mine.getPosition().getX() == x &&
+                mine.getPosition().getY() == y));
     }
 }

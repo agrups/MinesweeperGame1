@@ -24,6 +24,14 @@ public class GameField {
         setup();
     }
 
+    public int[][] getModel() {
+        return model;
+    }
+
+    public void setModel(int x, int y) {
+        this.model[x][y] = 1;
+    }
+
     public int getValue(int x, int y){
         return model[x][y];
     }
@@ -66,7 +74,7 @@ public class GameField {
         for (int boundX=-1; boundX<=1; boundX++) {
             for (int boundY=-1; boundY<=1; boundY++) {
                 if (outBounds(boundX+x, boundY+y))continue;
-                if(model[boundX + x][boundY + y] == 1){count += 1;}
+                if(model[boundX + x][boundY + y] == 1){count += 1;}    //sita vieta
             }
         }
         return count;
@@ -76,9 +84,9 @@ public class GameField {
         if(outBounds(x,y))return;
 /*        if(revealed[x][y])return;
         revealed[x][y]=true;*/
-        if(getRevealed(x, y))return;
+        if(getRevealed(x, y) == true)return;
         setRevealed(x, y);
-        if(calculateMinesNear(x,y)!=0)return;
+        if(calculateMinesNear(x,y)!=0)return;    //buvo ir turi buti !=
         reveal(x-1,y-1);
         reveal(x-1,y+1);
         reveal(x+1,y-1);

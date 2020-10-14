@@ -6,6 +6,8 @@ public class GameRules {
 
     private boolean gameOver =false;
 
+    //private int revealed
+
     public GameRules(GameLevel level) {
         this.level = level;
     }
@@ -24,18 +26,20 @@ public class GameRules {
 
         switch (input.charAt(0)) {
             case 'f':
-                Flag flag = level.getFlag(new Position(x, y));
-                if(flag == null){
-                    level.getFlags().add(flag);
+                Position position = new Position(x, y);
+                if(level.hasFlag(position)){
+                    level.getFlags().remove(level.getFlag(position));
                 }else{
-                    level.getFlags().remove(flag);
+                    Flag flag = new Flag(position);
+                    level.getFlags().add(flag);
+                    level.getGameField().setRevealed(x, y); //
                 }
                 break;
             case 'o':
-                if (level.getGameField().getRevealed(x, y) == false){
-                    //level.getGameField().getRevealed()[x][y] = true;
-                    if(level.getMines().contains(new Mine(new Position(x,y)))){
+                if (!level.getGameField().getRevealed(x, y)){
+                    if(level.hasMine(new Position(x, y))){
                         setGameOver(true);
+                        level.getGameField().setRevealed(x, y);
                     }
                     else{
                         level.getGameField().reveal(x, y);

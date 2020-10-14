@@ -42,10 +42,18 @@ public class GameLevel {
     }
 
     public boolean hasMine(Position position){
-        return mines.stream().anyMatch((mine -> mine.getPosition() == position));
+        return mines.stream().anyMatch(mine -> mine.getPosition().getX() == position.getX() &&
+                mine.getPosition().getY() == position.getY());
+    }
+
+    public boolean hasFlag(Position position){
+        return flags.stream().anyMatch(flag -> flag.getPosition().getX() == position.getX() &&
+                flag.getPosition().getY() == position.getY());
     }
 
     public Flag getFlag(Position position){
-        return flags.stream().filter(flag -> flag.getPosition() == position).findFirst().orElse(null);
+/*        return flags.stream().filter(flag -> flag.getPosition() == position).findFirst().orElse(null);*/
+        return flags.stream().filter(flag -> flag.getPosition().getX() == position.getX() &&
+                flag.getPosition().getY() == position.getY()).findFirst().orElse(null);
     }
 }

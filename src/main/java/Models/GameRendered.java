@@ -7,12 +7,16 @@ public class GameRendered {
         for (int x = 0; x < 9 /*gameLevel.getGameField().getFieldWidth()*/; x++) {
             for (int y = 0; y < 9/*gameLevel.getGameField().getFieldHeight()*/; y++) {
 
-                if(gameLevel.getGameField().getRevealed(x, y) == false){
+                if(gameLevel.hasFlag(new Position(x, y))){
+                    System.out.print("F");
+                    continue;
+                }
+                if(!gameLevel.getGameField().getRevealed(x, y)){
                     System.out.print(".");
                     continue;
                 }
-                if(gameLevel.getFlag(new Position(x, y)) != null){
-                    System.out.print("F");
+                if(gameLevel.hasMine(new Position(x, y))){
+                    System.out.print("#");
                     continue;
                 }
 
@@ -27,11 +31,6 @@ public class GameRendered {
                 else if (near==6) System.out.print("6");
                 else if (near==7) System.out.print("7");
                 else if (near==8) System.out.print("8");
-
-
-                else if(gameLevel.hasMine(new Position(x,y)) ){
-                    System.out.print("#");
-                }
             }
             System.out.println();
         }
