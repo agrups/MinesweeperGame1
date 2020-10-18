@@ -37,10 +37,10 @@ public class GameRules {
         switch (input.charAt(0)) {
             case 'f':
                 Position position = new Position(x, y);
-                if(level.hasFlag(position)){
+                if (level.hasFlag(position)) {
                     level.getFlags().remove(level.getFlag(position));
                     level.getGameField().setRevealed(x, y, false);
-                }else{
+                } else {
                     Flag flag = new Flag(position);
                     level.getFlags().add(flag);
                     level.getGameField().setRevealed(x, y, true);
@@ -48,13 +48,12 @@ public class GameRules {
                 }
                 break;
             case 'o':
-                if (!level.getGameField().getRevealed(x, y)){
-                    if(level.hasMine(new Position(x, y))){
+                if (!level.getGameField().getRevealed(x, y)) {
+                    if (level.hasMine(new Position(x, y))) {
                         setGameOver(true);
                         setWon(false);
                         level.getGameField().setRevealed(x, y, true);
-                    }
-                    else{
+                    } else {
                         level.getGameField().reveal(x, y);
                     }
                 }
@@ -62,15 +61,15 @@ public class GameRules {
         }
     }
 
-    public void checkIfWon(int x, int y){
-        for(int i =0; i < level.getGameField().getFieldHeight(); i++){
-            for(int j = 0; j < level.getGameField().getFieldWidth(); j++){
-                if(!level.getGameField().getRevealed(x, y)){
+    public void checkIfWon(int x, int y) {
+        for (int i = 0; i < level.getGameField().getFieldHeight(); i++) {
+            for (int j = 0; j < level.getGameField().getFieldWidth(); j++) {
+                if (!level.getGameField().getRevealed(x, y)) {
                     return;
                 }
             }
         }
-        if(level.getFlags().size() == 10){
+        if (level.getFlags().size() == 10) {
             setGameOver(true);
             setWon(true);
             System.out.println("Congrats, you won!!!");

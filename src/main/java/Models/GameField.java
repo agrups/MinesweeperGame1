@@ -1,8 +1,12 @@
 package Models;
 
+import java.util.ArrayList;
+
 public class GameField {
-    private int fieldWidth = 9;
+    private int fieldWidth = 9;  //size
     private int fieldHeight = 9;
+
+    private Field[][] map = new Field[fieldHeight][fieldWidth];
 
     private boolean[][] revealed = new boolean[fieldWidth][fieldHeight];
 
@@ -20,17 +24,20 @@ public class GameField {
         this.model[x][y] = 1;
     }
 
-    public int getValue(int x, int y){
+    public int getValue(int x, int y) {
         return model[x][y];
     }
+
     public void setup() {
         for (int x = 0; x < fieldHeight; x++) {
             for (int y = 0; y < fieldWidth; y++) {
                 this.revealed[x][y] = false;
                 model[x][y] = 0;
+                map[x][y] = new Field();
             }
         }
     }
+
     public int getFieldWidth() {
         return 9;
     }
@@ -47,38 +54,44 @@ public class GameField {
         this.fieldHeight = fieldHeight;
     }
 
-    public boolean getRevealed(int x, int y) { return this.revealed[x][y]; }
+    public boolean getRevealed(int x, int y) {
+        return this.revealed[x][y];
+    }
 
-    public void setRevealed(int x, int y, boolean b) {this.revealed[x][y] = b;}
+    public void setRevealed(int x, int y, boolean b) {
+        this.revealed[x][y] = b;
+    }
 
-    public boolean outBounds(int x, int y){
-        return x<0 || y<0 || x>=fieldWidth || y>=fieldHeight;
+    public boolean outBounds(int x, int y) {
+        return x < 0 || y < 0 || x >= fieldWidth || y >= fieldHeight;
     }
 
     public int calculateMinesNear(int x, int y) {
-        if(outBounds(x,y))return 0;
-        int count=0;
-        for (int boundX=-1; boundX<=1; boundX++) {
-            for (int boundY=-1; boundY<=1; boundY++) {
-                if (outBounds(boundX+x, boundY+y))continue;
-                if(model[boundX + x][boundY + y] == 1){count += 1;}    //sita vieta
+        if (outBounds(x, y)) return 0;
+        int count = 0;
+        for (int boundX = -1; boundX <= 1; boundX++) {
+            for (int boundY = -1; boundY <= 1; boundY++) {
+                if (outBounds(boundX + x, boundY + y)) continue;
+                if (model[boundX + x][boundY + y] == 1) {
+                    count += 1;
+                }    //sita vieta
             }
         }
         return count;
     }
 
-    public void reveal(int x, int y){
-        if(outBounds(x,y))return;
-        if(getRevealed(x, y))return;
+    public void reveal(int x, int y) {
+        if (outBounds(x, y)) return;
+        if (getRevealed(x, y)) return;
         setRevealed(x, y, true);
-        if(calculateMinesNear(x,y)!=0)return;
-        reveal(x-1,y-1);
-        reveal(x-1,y+1);
-        reveal(x+1,y-1);
-        reveal(x+1,y+1);
-        reveal(x-1,y);
-        reveal(x+1,y);
-        reveal(x,y-1);
-        reveal(x,y+1);
+        if (calculateMinesNear(x, y) != 0) return;
+        reveal(x - 1, y - 1);
+        reveal(x - 1, y + 1);
+        reveal(x + 1, y - 1);
+        reveal(x + 1, y + 1);
+        reveal(x - 1, y);
+        reveal(x + 1, y);
+        reveal(x, y - 1);
+        reveal(x, y + 1);
     }
 }

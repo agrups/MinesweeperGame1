@@ -1,7 +1,7 @@
 package Models;
 
 
-public class GameRendered {
+public class GameRenderer {
 
     public void renderMap(GameLevel gameLevel) {
         for (int x = 0; x < gameLevel.getGameField().getFieldHeight(); x++) {
@@ -21,16 +21,8 @@ public class GameRendered {
                 }
 
                 int near = gameLevel.getGameField().calculateMinesNear(x, y);
+                System.out.print(near);
 
-                if (near==0) System.out.print("0");
-                else if (near==1) System.out.print("1");
-                else if (near==2) System.out.print("2");
-                else if (near==3) System.out.print("3");
-                else if (near==4) System.out.print("4");
-                else if (near==5) System.out.print("5");
-                else if (near==6) System.out.print("6");
-                else if (near==7) System.out.print("7");
-                else if (near==8) System.out.print("8");
             }
             System.out.println();
         }
