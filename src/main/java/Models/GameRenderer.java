@@ -3,24 +3,24 @@ package Models;
 
 public class GameRenderer {
 
-    public void renderMap(GameLevel gameLevel) {
-        for (int x = 0; x < gameLevel.getGameField().getFieldHeight(); x++) {
-            for (int y = 0; y < gameLevel.getGameField().getFieldWidth(); y++) {
+    public void renderMap(GameField gameField) {
+        for (int x = 0; x < gameField.getBorderX(); x++) {
+            for (int y = 0; y < gameField.getBorderY(); y++) {
 
-                if(gameLevel.hasFlag(new Position(x, y))){
+                if(gameField.getFields()[x][y].isFlagged()){
                     System.out.print("F");
                     continue;
                 }
-                if(!gameLevel.getGameField().getRevealed(x, y)){
+                if(!gameField.getFields()[x][y].isRevealed()){
                     System.out.print(".");
                     continue;
                 }
-                if(gameLevel.hasMine(new Position(x, y))){
+                if(gameField.getFields()[x][y].isMine()){
                     System.out.print("#");
                     continue;
                 }
 
-                int near = gameLevel.getGameField().calculateMinesNear(x, y);
+                int near = gameField.calculateMinesNear(x, y);
                 System.out.print(near);
 
             }

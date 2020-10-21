@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class Main {
     public static void main(String s[]) throws IOException {
-        GameField map = new GameField();
+/*        GameField map = new GameField();
 
         ArrayList<Flag> mines = new ArrayList<>();
 
@@ -52,5 +52,6 @@ public class Main {
     public static boolean containsMine(List<Flag> mines, int x, int y){                 //sitas kartojasi klaseje gamelevel
         return mines.stream().anyMatch((mine -> mine.getPosition().getX() == x &&
                 mine.getPosition().getY() == y));
+    }*/
     }
 }

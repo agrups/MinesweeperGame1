@@ -3,7 +3,7 @@ package Models;
 public class Field {
     private boolean isMine = false;
     private boolean isFlagged = false;
-    private boolean revealed = false;
+    private boolean isRevealed = false;
 
     public Field() {
     }
@@ -29,10 +29,10 @@ public class Field {
     }
 
     public boolean isRevealed() {
-        return revealed;
+        return isRevealed;
     }
 
     public void setRevealed(boolean revealed) {
-        this.revealed = revealed;
+        this.isRevealed = revealed;
     }
 }

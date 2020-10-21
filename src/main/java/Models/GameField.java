@@ -1,69 +1,48 @@
 package Models;
 
-import java.util.ArrayList;
+import java.util.Random;
 
 public class GameField {
-    private int fieldWidth = 9;  //size
-    private int fieldHeight = 9;
 
-    private Field[][] map = new Field[fieldHeight][fieldWidth];
+    private static final int borderX = 9;
+    private static final int borderY = 9;
+    private Field[][] fields = new Field[borderX][borderY];
+    private static final int mines = 10;
 
-    private boolean[][] revealed = new boolean[fieldWidth][fieldHeight];
-
-    private int model[][] = new int[fieldWidth][fieldHeight];
-
-    public GameField() {
-        setup();
+    public GameField(){
+        generateMines();
     }
 
-    public int[][] getModel() {
-        return model;
-    }
-
-    public void setModel(int x, int y) {
-        this.model[x][y] = 1;
-    }
-
-    public int getValue(int x, int y) {
-        return model[x][y];
-    }
-
-    public void setup() {
-        for (int x = 0; x < fieldHeight; x++) {
-            for (int y = 0; y < fieldWidth; y++) {
-                this.revealed[x][y] = false;
-                model[x][y] = 0;
-                map[x][y] = new Field();
-            }
+    public void generateMines(){
+        Random rand = new Random();
+        int i = 0;
+        while (i < 10) {
+            int x = rand.nextInt(9);
+            int y = rand.nextInt(9);
+            if (fields[x][y].isMine()) continue;
+            fields[x][y].setMine(true);
+            i++;
         }
     }
 
-    public int getFieldWidth() {
-        return 9;
+    public static int getMines() {
+        return mines;
     }
 
-    public void setFieldWidth(int fieldWidth) {
-        this.fieldWidth = fieldWidth;
+    public static int getBorderX() {
+        return borderX;
     }
 
-    public int getFieldHeight() {
-        return 9;
+    public static int getBorderY() {
+        return borderY;
     }
 
-    public void setFieldHeight(int fieldHeight) {
-        this.fieldHeight = fieldHeight;
-    }
-
-    public boolean getRevealed(int x, int y) {
-        return this.revealed[x][y];
-    }
-
-    public void setRevealed(int x, int y, boolean b) {
-        this.revealed[x][y] = b;
+    public Field[][] getFields() {
+        return fields;
     }
 
     public boolean outBounds(int x, int y) {
-        return x < 0 || y < 0 || x >= fieldWidth || y >= fieldHeight;
+        return x < 0 || y < 0 || x >= borderX || y >= borderY;
     }
 
     public int calculateMinesNear(int x, int y) {
@@ -72,9 +51,9 @@ public class GameField {
         for (int boundX = -1; boundX <= 1; boundX++) {
             for (int boundY = -1; boundY <= 1; boundY++) {
                 if (outBounds(boundX + x, boundY + y)) continue;
-                if (model[boundX + x][boundY + y] == 1) {
+                if (fields[boundX + x][boundY + y].isMine()) {
                     count += 1;
-                }    //sita vieta
+                }
             }
         }
         return count;
@@ -82,8 +61,8 @@ public class GameField {
 
     public void reveal(int x, int y) {
         if (outBounds(x, y)) return;
-        if (getRevealed(x, y)) return;
-        setRevealed(x, y, true);
+        if (fields[x][y].isRevealed()) return;
+        fields[x][y].setRevealed(true);
         if (calculateMinesNear(x, y) != 0) return;
         reveal(x - 1, y - 1);
         reveal(x - 1, y + 1);

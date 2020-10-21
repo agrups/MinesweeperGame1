@@ -2,19 +2,20 @@ package Models;
 
 public class GameRules {
 
-    private GameLevel level;
+    GameField gameField;
+   // Minesweeper minesweeper;
 
-    private boolean gameOver = false;
+/*    private boolean gameOver = false;
 
     private boolean won = false;
 
-    private int revealed = 0;
+    private int revealed = 0;*/
 
-    public GameRules(GameLevel level) {
+/*    public GameRules(GameLevel level) {
         this.level = level;
-    }
+    }*/
 
-    public boolean isGameOver() {
+/*    public boolean isGameOver() {
         return gameOver;
     }
 
@@ -28,51 +29,65 @@ public class GameRules {
 
     public void setWon(boolean won) {
         this.won = won;
+    }*/
+
+    public GameRules() {
     }
 
-    public void processUserInput(String input) {
+    public GameStatus processUserInput(String input) {
         int x = Integer.parseInt(input.substring(1, 2));
         int y = Integer.parseInt(input.substring(2));
 
+        Field field = gameField.getFields()[x][y];
+
         switch (input.charAt(0)) {
             case 'f':
-                Position position = new Position(x, y);
-                if (level.hasFlag(position)) {
-                    level.getFlags().remove(level.getFlag(position));
-                    level.getGameField().setRevealed(x, y, false);
+
+                //Position position = new Position(x, y);
+                if (field.isFlagged()) {
+                   field.setFlagged(false);
+                    //level.getFlags().remove(level.getFlag(position));
+                    //level.getGameField().setRevealed(x, y, false);
+                    return GameStatus.CONTINUE;
                 } else {
-                    Flag flag = new Flag(position);
+                    field.setFlagged(true);
+/*                    Flag flag = new Flag(position);
                     level.getFlags().add(flag);
-                    level.getGameField().setRevealed(x, y, true);
+                    level.getGameField().setRevealed(x, y, true);*/
                     checkIfWon(x, y);
                 }
                 break;
             case 'o':
-                if (!level.getGameField().getRevealed(x, y)) {
-                    if (level.hasMine(new Position(x, y))) {
-                        setGameOver(true);
-                        setWon(false);
-                        level.getGameField().setRevealed(x, y, true);
+                if (!field.isRevealed() && !field.isFlagged()) {
+                    if (field.isMine()) {
+/*                        setGameOver(true);
+                        setWon(false);*/
+                        field.setRevealed(true);
+                        return GameStatus.LOST;
                     } else {
-                        level.getGameField().reveal(x, y);
-                    }
+                        field.setRevealed(true);
+                        checkIfWon(x, y);
+                }
                 }
                 break;
         }
+        return GameStatus.CONTINUE;
     }
 
-    public void checkIfWon(int x, int y) {
-        for (int i = 0; i < level.getGameField().getFieldHeight(); i++) {
-            for (int j = 0; j < level.getGameField().getFieldWidth(); j++) {
-                if (!level.getGameField().getRevealed(x, y)) {
-                    return;
+    public GameStatus checkIfWon(int x, int y) {
+        for (int i = 0; i < gameField.getBorderX(); i++) {
+            for (int j = 0; j < gameField.getBorderY(); j++) {
+                if (!gameField.getFields()[x][y].isRevealed()) {
+                    return GameStatus.CONTINUE;
                 }
             }
         }
-        if (level.getFlags().size() == 10) {
-            setGameOver(true);
+        if (gameField.getMines() == 10) {
+            return GameStatus.WON;
+/*            setGameOver(true);
             setWon(true);
-            System.out.println("Congrats, you won!!!");
+            System.out.println("Congrats, you won!!!");*/
         }
+        return GameStatus.CONTINUE;
     }
 }
