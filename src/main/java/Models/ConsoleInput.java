@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class ConsoleInput {
 
-    public String readConsoleInput(GameField gameField) throws IOException {
+    public String readConsoleInput(Field[][] fields) throws IOException {
 
         boolean check = false;
         Scanner scan = new Scanner(System.in);
@@ -14,7 +14,7 @@ public class ConsoleInput {
             System.out.println("f - put or take off a flag, o - open a cell + coordinates e.g. f15, t48, o75");
 
             input = scan.next();
-            checkConsoleInput(gameField, input);
+            checkConsoleInput(fields, input);
             /*if ((input.charAt(0) == 'f' || input.charAt(0) == 'o')
                     && Integer.parseInt(input.substring(1, 2)) < minesweeper.getGameField().getBorderX()
                     && Integer.parseInt(input.substring(2)) < minesweeper.getGameField().getBorderY()
@@ -28,10 +28,10 @@ public class ConsoleInput {
         return input;
     }
 
-    public boolean checkConsoleInput(GameField gameField, String input){
+    public boolean checkConsoleInput(Field[][] fields, String input){
         if ((input.charAt(0) == 'f' || input.charAt(0) == 'o')
-                && Integer.parseInt(input.substring(1, 2)) < gameField.getBorderX()
-                && Integer.parseInt(input.substring(2)) < gameField.getBorderY()
+                && Integer.parseInt(input.substring(1, 2)) < fields.length
+                && Integer.parseInt(input.substring(2)) < fields.length
                 && input.length() == 3) {
             return true;
         } else {

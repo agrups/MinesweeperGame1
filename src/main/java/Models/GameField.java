@@ -10,9 +10,17 @@ public class GameField {
     private static final int mines = 10;
 
     public GameField(){
+        setUpMap();
         generateMines();
     }
 
+    public void setUpMap(){
+        for(int x = 0; x < borderX; x++){
+            for(int y = 0; y < borderY; y++){
+                fields[x][y] = new Field();
+            }
+        }
+    }
     public void generateMines(){
         Random rand = new Random();
         int i = 0;

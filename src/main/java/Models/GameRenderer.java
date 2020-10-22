@@ -2,6 +2,8 @@ package Models;
 
 
 public class GameRenderer {
+    public GameRenderer() {
+    }
 
     public void renderMap(GameField gameField) {
         for (int x = 0; x < gameField.getBorderX(); x++) {
@@ -20,7 +22,7 @@ public class GameRenderer {
                     continue;
                 }
 
-                int near = gameField.calculateMinesNear(x, y);
+                int near = gameField.calculateMinesNear(x, y);      //reikalauja gameField, ar galima kazkaip inkapsuliuoti
                 System.out.print(near);
 
             }
