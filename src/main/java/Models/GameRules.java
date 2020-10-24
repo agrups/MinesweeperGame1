@@ -45,10 +45,11 @@ public class GameRules {
         GameStatus gameStatus;
         gameStatus = GameStatus.CONTINUE;
         int flaggedFields = 0;
-        for (int i = 0; i < fields.length; i++) {
-            for (int j = 0; j < fields[0].length; j++) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 if (!fields[x][y].isRevealed() && !fields[x][y].isFlagged()) {
                     gameStatus = GameStatus.CONTINUE;
+                    return gameStatus;
                 }
                 if(fields[x][y].isFlagged()){
                     flaggedFields++;

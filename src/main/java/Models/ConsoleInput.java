@@ -15,14 +15,6 @@ public class ConsoleInput {
 
             input = scan.next();
             check = checkConsoleInput(fields, input);
-            /*if ((input.charAt(0) == 'f' || input.charAt(0) == 'o')
-                    && Integer.parseInt(input.substring(1, 2)) < minesweeper.getGameField().getBorderX()
-                    && Integer.parseInt(input.substring(2)) < minesweeper.getGameField().getBorderY()
-                    && input.length() == 3) {
-                check = true;
-            } else {
-                System.out.println("Wrong input.");
-            }*/
         }
          //scan.close();
         return input;
