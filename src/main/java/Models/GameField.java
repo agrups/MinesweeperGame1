@@ -6,7 +6,7 @@ public class GameField {
 
     private static final int borderX = 9;
     private static final int borderY = 9;
-    private Field[][] fields = new Field[borderX][borderY];
+    private Field[][] fields = new Field[borderY][borderY];
     private static final int mines = 10;
 
     public GameField(){
@@ -25,10 +25,11 @@ public class GameField {
         Random rand = new Random();
         int i = 0;
         while (i < 10) {
-            int x = rand.nextInt(9);
-            int y = rand.nextInt(9);
+            int x = rand.nextInt(mines - 1);
+            int y = rand.nextInt(mines - 1);
             if (fields[x][y].isMine()) continue;
             fields[x][y].setMine(true);
+           // fields[x][y].setRevealed(true);    ///
             i++;
         }
     }

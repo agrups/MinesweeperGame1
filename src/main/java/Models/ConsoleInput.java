@@ -14,7 +14,7 @@ public class ConsoleInput {
             System.out.println("f - put or take off a flag, o - open a cell + coordinates e.g. f15, t48, o75");
 
             input = scan.next();
-            checkConsoleInput(fields, input);
+            check = checkConsoleInput(fields, input);
             /*if ((input.charAt(0) == 'f' || input.charAt(0) == 'o')
                     && Integer.parseInt(input.substring(1, 2)) < minesweeper.getGameField().getBorderX()
                     && Integer.parseInt(input.substring(2)) < minesweeper.getGameField().getBorderY()
@@ -31,7 +31,7 @@ public class ConsoleInput {
     public boolean checkConsoleInput(Field[][] fields, String input){
         if ((input.charAt(0) == 'f' || input.charAt(0) == 'o')
                 && Integer.parseInt(input.substring(1, 2)) < fields.length
-                && Integer.parseInt(input.substring(2)) < fields.length
+                && Integer.parseInt(input.substring(2)) < fields[0].length
                 && input.length() == 3) {
             return true;
         } else {

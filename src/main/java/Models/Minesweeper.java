@@ -15,14 +15,13 @@ public class Minesweeper {
 
     public void playGame() throws IOException {
 
-        gameRenderer.renderMap(gameField);
         while (gameStatus == CONTINUE) {
 
         gameRenderer.renderMap(gameField);
 
         String key = consoleInput.readConsoleInput(gameField.getFields());
 
-        gameRules.processUserInput(key, gameField.getFields());
+        gameStatus = gameRules.processUserInput(key, gameField);
     }
 
         gameRenderer.renderMap(gameField);
