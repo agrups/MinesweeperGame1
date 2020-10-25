@@ -1,5 +1,6 @@
 package Models;
 
+import static Models.GameStatus.LOST;
 import static Models.GameStatus.RUNNING;
 
 public class Minesweeper {
@@ -11,7 +12,7 @@ public class Minesweeper {
     GameStatus gameStatus = RUNNING;
 
     public void playGame() {
-
+        int moves = 0;
         while (gameStatus == gameStatus.RUNNING) {
 
         gameRenderer.renderMap(gameField);
@@ -19,8 +20,15 @@ public class Minesweeper {
         String key = consoleInput.readConsoleInput(gameField.getFields());
 
         gameStatus = gameRules.processUserInput(key, gameField);
+
+        moves++;
+
     }
         gameRenderer.renderMap(gameField);
+
+        if(moves == 1 && gameStatus == LOST){
+            startAgain();
+        }
     }
 
     public void printResult(){
@@ -32,4 +40,9 @@ public class Minesweeper {
         }
     }
 
+    private void startAgain(){
+        Minesweeper mineSweeper = new Minesweeper();
+        System.out.println();
+        mineSweeper.playGame();
+    }
 }

@@ -17,13 +17,12 @@ public class GameRules {
         GameStatus gameStatus = RUNNING;
         switch (input.charAt(0)) {
             case 'f':
-
                 if (field.isFlagged()) {
                     field.setFlagged(false);
                     gameStatus = RUNNING;
                 } else {
                     field.setFlagged(true);
-                    gameStatus = areAllFlagsMined(fields, gameField.getMinesCount());
+                    gameStatus = checkIfWon(fields, gameField.getMinesCount());
                 }
                 break;
             case 'o':
@@ -33,7 +32,7 @@ public class GameRules {
                         gameStatus = GameStatus.LOST;
                     } else {
                         gameField.reveal(x, y);
-                        gameStatus = areAllFlagsMined(fields, gameField.getMinesCount());
+                        gameStatus = checkIfWon(fields, gameField.getMinesCount());
                 }
                 }
                 break;
@@ -41,7 +40,7 @@ public class GameRules {
         return gameStatus;
     }
 
-    public GameStatus areAllFlagsMined(Field[][] fields, int minesCount) {
+    public GameStatus checkIfWon(Field[][] fields, int minesCount) {
         int flaggedMines = 0;
         for (int i = 0; i < fields.length; i++) {
             for (int j = 0; j < fields[0].length; j++) {
