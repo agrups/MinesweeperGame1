@@ -21,14 +21,23 @@ public class ConsoleInput {
     }
 
     public boolean checkConsoleInput(Field[][] fields, String input){
-        if ((input.charAt(0) == 'f' || input.charAt(0) == 'o')
-                && Integer.parseInt(input.substring(1, 2)) < fields.length
-                && Integer.parseInt(input.substring(2)) < fields[0].length
-                && input.length() == 3) {
+        if (input.length() == 3 && (input.charAt(0) == 'f' || input.charAt(0) == 'o')
+                && parseInt(input.substring(1, 2)) != -1
+                && parseInt(input.substring(1, 2)) < fields.length
+                && parseInt(input.substring(2)) != -1
+                && parseInt(input.substring(2)) < fields[0].length) {
             return true;
         } else {
             System.out.println("Wrong input.");
             return false;
+        }
+    }
+
+    private int parseInt(String numberText){
+        try{
+            return Integer.parseInt(numberText);
+        }catch(NumberFormatException ex){
+            return -1;
         }
     }
 }

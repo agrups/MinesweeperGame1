@@ -1,5 +1,8 @@
 package Models;
 
+import static Models.GameStatus.RUNNING;
+import static Models.GameStatus.WON;
+
 public class GameRules {
 
     public GameRules() {
@@ -11,17 +14,16 @@ public class GameRules {
         int y = Integer.parseInt(input.substring(2));
 
         Field field = fields[x][y];
-        GameStatus gameStatus;
-        gameStatus = GameStatus.CONTINUE;
+        GameStatus gameStatus = RUNNING;
         switch (input.charAt(0)) {
             case 'f':
 
                 if (field.isFlagged()) {
                     field.setFlagged(false);
-                    gameStatus = GameStatus.CONTINUE;
+                    gameStatus = RUNNING;
                 } else {
                     field.setFlagged(true);
-                    gameStatus = checkIfWon(x, y, gameField);
+                    gameStatus = areAllFlagsMined(fields, gameField.getMinesCount());
                 }
                 break;
             case 'o':
@@ -31,34 +33,27 @@ public class GameRules {
                         gameStatus = GameStatus.LOST;
                     } else {
                         gameField.reveal(x, y);
-                        gameStatus = checkIfWon(x, y, gameField);
+                        gameStatus = areAllFlagsMined(fields, gameField.getMinesCount());
                 }
                 }
                 break;
         }
-        //return GameStatus.CONTINUE;
         return gameStatus;
     }
 
-    public GameStatus checkIfWon(int x, int y, GameField gameField) {
-        Field[][] fields = gameField.getFields();
-        GameStatus gameStatus;
-        gameStatus = GameStatus.CONTINUE;
-        int flaggedFields = 0;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                if (!fields[x][y].isRevealed() && !fields[x][y].isFlagged()) {
-                    gameStatus = GameStatus.CONTINUE;
-                    return gameStatus;
-                }
-                if(fields[x][y].isFlagged()){
-                    flaggedFields++;
+    public GameStatus areAllFlagsMined(Field[][] fields, int minesCount) {
+        int flaggedMines = 0;
+        for (int i = 0; i < fields.length; i++) {
+            for (int j = 0; j < fields[0].length; j++) {
+                if(fields[i][j].isFlagged()){
+                    if(fields[i][j].isMine()){
+                        flaggedMines++;
+                    }else{
+                        return RUNNING;
+                    }
                 }
             }
         }
-        if (flaggedFields == gameField.getMines()) {
-            gameStatus = GameStatus.WON;
-        }
-        return gameStatus;
+        return flaggedMines == minesCount ? WON : RUNNING;
     }
 }

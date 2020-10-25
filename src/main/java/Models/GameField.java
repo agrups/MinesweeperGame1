@@ -6,8 +6,8 @@ public class GameField {
 
     private static final int borderX = 9;
     private static final int borderY = 9;
-    private Field[][] fields = new Field[borderY][borderY];
-    private static final int mines = 10;
+    private Field[][] fields = new Field[borderX][borderY];
+    private static final int MINES_COUNT = 1;
 
     public GameField(){
         setUpMap();
@@ -24,18 +24,17 @@ public class GameField {
     public void generateMines(){
         Random rand = new Random();
         int i = 0;
-        while (i < 10) {
-            int x = rand.nextInt(mines - 1);
-            int y = rand.nextInt(mines - 1);
+        while (i < MINES_COUNT) {
+            int x = rand.nextInt(borderX - 1);
+            int y = rand.nextInt(borderY - 1);
             if (fields[x][y].isMine()) continue;
             fields[x][y].setMine(true);
-           // fields[x][y].setRevealed(true);    ///
             i++;
         }
     }
 
-    public static int getMines() {
-        return mines;
+    public static int getMinesCount() {
+        return MINES_COUNT;
     }
 
     public static int getBorderX() {

@@ -10,20 +10,20 @@ public class GameRenderer {
             for (int y = 0; y < gameField.getBorderY(); y++) {
 
                 if(gameField.getFields()[x][y].isFlagged()){
-                    System.out.print("F");
+                    System.out.print("F  ");
                     continue;
                 }
                 if(!gameField.getFields()[x][y].isRevealed()){
-                    System.out.print(".");
+                    System.out.print(".  ");
                     continue;
                 }
                 if(gameField.getFields()[x][y].isMine()){
-                    System.out.print("#");
+                    System.out.print("#  ");
                     continue;
                 }
 
-                int near = gameField.calculateMinesNear(x, y);      //reikalauja gameField, ar galima kazkaip inkapsuliuoti
-                System.out.print(near);
+                int near = gameField.calculateMinesNear(x, y);
+                System.out.print(near + "  ");
 
             }
             System.out.println();

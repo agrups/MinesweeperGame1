@@ -2,7 +2,7 @@ package Models;
 
 import java.io.IOException;
 
-import static Models.GameStatus.CONTINUE;
+import static Models.GameStatus.RUNNING;
 import static Models.GameStatus.LOST;
 
 public class Minesweeper {
@@ -11,11 +11,11 @@ public class Minesweeper {
     ConsoleInput consoleInput = new ConsoleInput();
     GameRules gameRules = new GameRules();
 
-    GameStatus gameStatus = CONTINUE;
+    GameStatus gameStatus = RUNNING;
 
     public void playGame() throws IOException {
 
-        while (gameStatus == CONTINUE) {
+        while (gameStatus == gameStatus.RUNNING) {
 
         gameRenderer.renderMap(gameField);
 
@@ -23,12 +23,11 @@ public class Minesweeper {
 
         gameStatus = gameRules.processUserInput(key, gameField);
     }
-
         gameRenderer.renderMap(gameField);
     }
 
     public void printResult(){
-        if(gameStatus == LOST){
+        if(gameStatus == gameStatus.LOST){
             System.out.println("There was a mine. You have lost");
         }
         else{

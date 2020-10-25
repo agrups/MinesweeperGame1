@@ -8,10 +8,6 @@ public class Field {
     public Field() {
     }
 
-    public String getState() {
-        return ".";
-    }
-
     public boolean isMine() {
         return isMine;
     }
