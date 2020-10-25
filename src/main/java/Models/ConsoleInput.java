@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class ConsoleInput {
 
-    public String readConsoleInput(Field[][] fields) throws IOException {
+    public String readConsoleInput(Field[][] fields) {
 
         boolean check = false;
         Scanner scan = new Scanner(System.in);
         String input = "";
-        while (check == false) {
+        while (!check) {
             System.out.println("f - put or take off a flag, o - open a cell + coordinates e.g. f15, t48, o75");
 
             input = scan.next();

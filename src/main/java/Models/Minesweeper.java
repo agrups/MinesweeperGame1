@@ -1,9 +1,6 @@
 package Models;
 
-import java.io.IOException;
-
 import static Models.GameStatus.RUNNING;
-import static Models.GameStatus.LOST;
 
 public class Minesweeper {
     GameField gameField = new GameField();
@@ -13,7 +10,7 @@ public class Minesweeper {
 
     GameStatus gameStatus = RUNNING;
 
-    public void playGame() throws IOException {
+    public void playGame() {
 
         while (gameStatus == gameStatus.RUNNING) {
 

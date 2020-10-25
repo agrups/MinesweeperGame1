@@ -1,9 +1,7 @@
-import Models.*;
-
-import java.io.IOException;
+import Models.Minesweeper;
 
 public class Main {
-    public static void main(String s[]) throws IOException {
+    public static void main(String[] s) {
         Minesweeper minesweeper = new Minesweeper();
 
         minesweeper.playGame();

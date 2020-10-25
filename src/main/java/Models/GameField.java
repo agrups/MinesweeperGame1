@@ -7,7 +7,7 @@ public class GameField {
     private static final int borderX = 9;
     private static final int borderY = 9;
     private Field[][] fields = new Field[borderX][borderY];
-    private static final int MINES_COUNT = 1;
+    private static final int MINES_COUNT = 10;
 
     public GameField(){
         setUpMap();
