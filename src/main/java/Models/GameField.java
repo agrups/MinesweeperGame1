@@ -27,7 +27,9 @@ public class GameField {
         while (i < MINES_COUNT) {
             int x = rand.nextInt(borderX - 1);
             int y = rand.nextInt(borderY - 1);
-            if (fields[x][y].isMine()) continue;
+            if (fields[x][y].isMine())
+                continue;
+
             fields[x][y].setMine(true);
             i++;
         }
@@ -68,17 +70,20 @@ public class GameField {
     }
 
     public void reveal(int x, int y) {
-        if (outBounds(x, y)) return;
-        if (fields[x][y].isRevealed()) return;
+        if (outBounds(x, y))
+            return;
+        if (fields[x][y].isRevealed())
+            return;
         fields[x][y].setRevealed(true);
-        if (calculateMinesNear(x, y) != 0) return;
-        reveal(x - 1, y - 1);
-        reveal(x - 1, y + 1);
-        reveal(x + 1, y - 1);
-        reveal(x + 1, y + 1);
-        reveal(x - 1, y);
-        reveal(x + 1, y);
-        reveal(x, y - 1);
-        reveal(x, y + 1);
+        if (calculateMinesNear(x, y) != 0)
+            return;
+
+        for (int boundX = -1; boundX <= 1; boundX++) {
+            for (int boundY = -1; boundY <= 1; boundY++) {
+                if(!(boundX == 0 && boundY == 0)){
+                    reveal(boundX + x, boundY + y);
+                }
+            }
+        }
     }
 }
