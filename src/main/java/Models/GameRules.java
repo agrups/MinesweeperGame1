@@ -33,7 +33,7 @@ public class GameRules {
                     } else {
                         gameField.reveal(x, y);
                         gameStatus = checkIfWon(fields, gameField.getMinesCount());
-                }
+                    }
                 }
                 break;
         }
@@ -44,10 +44,10 @@ public class GameRules {
         int flaggedMines = 0;
         for (int i = 0; i < fields.length; i++) {
             for (int j = 0; j < fields[0].length; j++) {
-                if(fields[i][j].isFlagged()){
-                    if(fields[i][j].isMine()){
+                if (fields[i][j].isFlagged()) {
+                    if (fields[i][j].isMine()) {
                         flaggedMines++;
-                    }else{
+                    } else {
                         return RUNNING;
                     }
                 }

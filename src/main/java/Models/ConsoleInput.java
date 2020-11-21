@@ -16,11 +16,11 @@ public class ConsoleInput {
             input = scan.next();
             check = checkConsoleInput(fields, input);
         }
-         //scan.close();
+        //scan.close();
         return input;
     }
 
-    public boolean checkConsoleInput(Field[][] fields, String input){
+    public boolean checkConsoleInput(Field[][] fields, String input) {
         if (input.length() == 3 && (input.charAt(0) == 'f' || input.charAt(0) == 'o')
                 && parseInt(input.substring(1, 2)) != -1
                 && parseInt(input.substring(1, 2)) < fields.length
@@ -33,10 +33,10 @@ public class ConsoleInput {
         }
     }
 
-    private int parseInt(String numberText){
-        try{
+    private int parseInt(String numberText) {
+        try {
             return Integer.parseInt(numberText);
-        }catch(NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             return -1;
         }
     }

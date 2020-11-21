@@ -9,19 +9,20 @@ public class GameField {
     private Field[][] fields = new Field[borderX][borderY];
     private static final int MINES_COUNT = 10;
 
-    public GameField(){
+    public GameField() {
         setUpMap();
         generateMines();
     }
 
-    public void setUpMap(){
-        for(int x = 0; x < borderX; x++){
-            for(int y = 0; y < borderY; y++){
+    public void setUpMap() {
+        for (int x = 0; x < borderX; x++) {
+            for (int y = 0; y < borderY; y++) {
                 fields[x][y] = new Field();
             }
         }
     }
-    public void generateMines(){
+
+    public void generateMines() {
         Random rand = new Random();
         int i = 0;
         while (i < MINES_COUNT) {
@@ -80,7 +81,7 @@ public class GameField {
 
         for (int boundX = -1; boundX <= 1; boundX++) {
             for (int boundY = -1; boundY <= 1; boundY++) {
-                if(!(boundX == 0 && boundY == 0)){
+                if (!(boundX == 0 && boundY == 0)) {
                     reveal(boundX + x, boundY + y);
                 }
             }
