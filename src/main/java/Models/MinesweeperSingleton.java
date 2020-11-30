@@ -2,13 +2,14 @@ package Models;
 
 import java.util.Scanner;
 
-import static Models.GameStatus.LOST;
 import static Models.GameStatus.RUNNING;
 
 public class MinesweeperSingleton {
 
     private static MinesweeperSingleton instance = null;
-    private MinesweeperSingleton() {}
+
+    private MinesweeperSingleton() {
+    }
 
     GameField gameField = new GameField();
     UnicodeRender unicodeRender = new UnicodeRender();
@@ -18,27 +19,25 @@ public class MinesweeperSingleton {
 
     GameStatus gameStatus = RUNNING;
 
-    public static MinesweeperSingleton getInstance(){
-        if (instance == null)
-        {
+    public static synchronized MinesweeperSingleton getInstance() {
+        if (instance == null) {
             instance = new MinesweeperSingleton();
         }
         return instance;
     }
 
-    public GameRenderer chooseVisual(){
+    public GameRenderer chooseVisual() {
         Scanner scan = new Scanner(System.in);
         String input = "";
         while (!input.equals("1") && !input.equals("2")) {
             System.out.println("If you want the game to be printed in unicode press 1, if not press 2: ");
             input = scan.next();
         }
-        if(input.equals("1")){
+        if (input.equals("1")) {
             return unicodeRender;
         }
         return consoleRender;
     }
-
 
     public void playGame(GameRenderer gameRenderer) {
 

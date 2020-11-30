@@ -1,6 +1,5 @@
 package Models;
 
-
 abstract class GameRenderer {
 
     public void printFlag() { }

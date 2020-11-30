@@ -16,7 +16,7 @@ public class ConsoleInput {
             input = scan.next();
             check = checkConsoleInput(fields, input);
         }
-        //scan.close();
+
         return input;
     }
 

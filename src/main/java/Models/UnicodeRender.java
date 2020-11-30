@@ -15,39 +15,43 @@ public class UnicodeRender extends GameRenderer {
 
     @Override
     public void printFlag() {
-        System.out.print(RED + "\uD83D\uDEA9 " + RESET);
+        print(RED,"\uD83D\uDEA9");
     }
 
     @Override
     public void printNotRevealed() {
-        System.out.print(BLUE_BOLD + "\u25A0 " + RESET);
+        print(BLUE_BOLD, "\u25A0");
     }
 
     @Override
     public void printBomb() {
-        System.out.print(BLACK + "\uD83D\uDCA3 " + RESET);
+        print(BLACK, "\uD83D\uDCA3");
     }
 
     @Override
     public void printNumber(int near) {
         if (near == 0) {
-            System.out.print(BLUE_BOLD + "\u25A1" + RESET + " ");
+            print(BLUE_BOLD, "\u25A1");
         } else if (near == 1) {
-            System.out.print(BLUE + "\uFF11" + RESET + " ");
+            print(BLUE, "\uFF11");
         } else if (near == 2) {
-            System.out.print(GREEN + "\uFF12" + RESET + " ");
+            print(GREEN, "\uFF12");
         } else if (near == 3) {
-            System.out.print(RED + "\uFF13" + RESET + " ");
+            print(RED, "\uFF13");
         } else if (near == 4) {
-            System.out.print(CYAN + "\uFF14" + RESET + " ");
+            print(CYAN, "\uFF14");
         } else if (near == 5) {
-            System.out.print(PURPLE + "\uFF15" + RESET + " ");
+            print(PURPLE, "\uFF15");
         } else if (near == 6) {
-            System.out.print(YELLOW + "\uFF16" + RESET + " ");
+            print(YELLOW, "\uFF16");
         } else if (near == 7) {
-            System.out.print(WHITE + "\uFF17" + RESET + " ");
+            print(WHITE, "\uFF17");
         } else if (near == 8) {
-            System.out.print(WHITE + "\uFF18" + RESET + " ");
+            print(WHITE, "\uFF18");
         }
+    }
+
+    private void print(String color, String symbol) {
+        System.out.print(color + symbol + RESET + " ");
     }
 }
