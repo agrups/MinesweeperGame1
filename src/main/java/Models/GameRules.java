@@ -1,7 +1,6 @@
 package Models;
 
-import static Models.GameStatus.RUNNING;
-import static Models.GameStatus.WON;
+import static Models.GameStatus.*;
 
 public class GameRules {
 
@@ -41,7 +40,7 @@ public class GameRules {
 
         if (field.isMine()) {
             field.setRevealed(true);
-            return GameStatus.LOST;
+            return LOST;
         } else {
             gameField.reveal(x, y);
             return checkIfWon(fields, gameField.getMinesCount());

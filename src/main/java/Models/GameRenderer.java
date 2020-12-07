@@ -2,10 +2,17 @@ package Models;
 
 abstract class GameRenderer {
 
-    public void printFlag() { }
-    public void printNotRevealed() { }
-    public void printBomb() { }
-    public void printNumber(int near){}
+    public void printFlag() {
+    }
+
+    public void printNotRevealed() {
+    }
+
+    public void printBomb() {
+    }
+
+    public void printNumber(int near) {
+    }
 
     public void renderMap(GameField gameField) {
         for (int x = 0; x < gameField.getBorderX(); x++) {

@@ -2,6 +2,7 @@ package Models;
 
 import java.util.Scanner;
 
+import static Models.GameStatus.LOST;
 import static Models.GameStatus.RUNNING;
 
 public class MinesweeperSingleton {
@@ -41,7 +42,7 @@ public class MinesweeperSingleton {
 
     public void playGame(GameRenderer gameRenderer) {
 
-        while (gameStatus == gameStatus.RUNNING) {
+        while (gameStatus == RUNNING) {
 
             gameRenderer.renderMap(gameField);
 
@@ -55,7 +56,7 @@ public class MinesweeperSingleton {
     }
 
     public void printResult() {
-        if (gameStatus == gameStatus.LOST) {
+        if (gameStatus == LOST) {
             System.out.println("There was a mine. You have lost");
         } else {
             System.out.println("Congrads!!! You won");

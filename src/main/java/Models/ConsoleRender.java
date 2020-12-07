@@ -1,6 +1,6 @@
 package Models;
 
-public class ConsoleRender extends GameRenderer{
+public class ConsoleRender extends GameRenderer {
     @Override
     public void printFlag() {
         System.out.print("F  ");
